@@ -79,41 +79,41 @@ void argumentsMatching() {
 void argumentCaptor() {
 //given
 Model owner = new Model(1L, "Pablo", "Villacañas");
-		List<Model> modelList = new ArrayList<>();
-		given(someRepository.findAllByLastName_Like(argumentCaptor.capture())).willReturn(modelList);
+ List<Model> modelList = new ArrayList<>();
+ given(someRepository.findAllByLastName_Like(argumentCaptor.capture())).willReturn(modelList);
 
-		//when
-		String s = sut.findAllByLastName(model);
+ //when
+ String s = sut.findAllByLastName(model);
 
-		//then
-		assertThat(argumentCaptor.getValue()).isEqualToIgnoringCase("%Villacañas%");
+ //then
+ assertThat(argumentCaptor.getValue()).isEqualToIgnoringCase("%Villacañas%");
 }
 
 @Tets
 void answering() {
-		//given
-		Model model = new Model(1L, "Pablo", "Villacañas");
-		Model modelFail = new Model(1L, "Pablo", "asdVillacañas");
+ //given
+ Model model = new Model(1L, "Pablo", "Villacañas");
+ Model modelFail = new Model(1L, "Pablo", "asdVillacañas");
 
-		given(someRepository.findAllByLastName_Like(argumentCaptor.capture()))
-						.willAnswer(invocationOnMock -> {
-								List<Model> models = new ArrayList<>();
-								Object lastname = invocationOnMock.getArgument(0);
-								if (lastname.equals("%Villacañas%")){
-										models.add(new Model(1L, "Pablo", "Villacañas"));
-										return models;
-								}else {
-										return models;
-								}
-						});
+ given(someRepository.findAllByLastName_Like(argumentCaptor.capture()))
+ .willAnswer(invocationOnMock -> {
+  List<Model> models = new ArrayList<>();
+   Object lastname = invocationOnMock.getArgument(0);
+    if (lastname.equals("%Villacañas%")){
+     models.add(new Model(1L, "Pablo", "Villacañas"));
+      return models;
+    }else {
+     return models;
+    }
+ });
 
-		//when
-		String s = sut.findAllByLastName(model);
-		String s2 = sut.findAllByLastName(modelFail);
+ //when
+ String s = sut.findAllByLastName(model);
+ String s2 = sut.findAllByLastName(modelFail);
 
-		//then
-		assertTrue(s.size == 1);
-		assertTrue(s2.empty);
+ //then
+ assertTrue(s.size == 1);
+ assertTrue(s2.empty);
 }
 ```
 
