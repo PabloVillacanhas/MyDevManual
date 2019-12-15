@@ -58,6 +58,7 @@ SomeInjectedRepository someRepository
 SomeService sut;
 
 @Captor
+ArgumentCaptor<String> captor;
 
 @Test
 void argumentsMatching() {
@@ -65,7 +66,8 @@ void argumentsMatching() {
  final String MATCH_ME = "MATCH_ME";
  Model expected = new Model().setId(1L);
 
- given(someRepository.save(argThat(argument ->        argument.getDescription().equals(MATCH_ME))))
+ given(someRepository.save(argThat(argument ->
+  argument.getDescription().equals(MATCH_ME))))
   .willReturn(expected);
 
  //when
@@ -77,8 +79,8 @@ void argumentsMatching() {
 
 @Test
 void argumentCaptor() {
-//given
-Model owner = new Model(1L, "Pablo", "Villacañas");
+ //given
+ Model owner = new Model(1L, "Pablo", "Villacañas");
  List<Model> modelList = new ArrayList<>();
  given(someRepository.findAllByLastName_Like(argumentCaptor.capture())).willReturn(modelList);
 
