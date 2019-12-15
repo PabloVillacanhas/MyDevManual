@@ -119,7 +119,7 @@ void answering() {
 }
 ```
 
-<script src="https://gist.github.com/PabloVillacanhas/73de599d9ae77db8df6714998d80ea51.js"></script>
+Snippet: https://gist.github.com/PabloVillacanhas/73de599d9ae77db8df6714998d80ea51.js
 
 ---
 
